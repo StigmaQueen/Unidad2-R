@@ -11,12 +11,16 @@ namespace VuelosAPI.Controllers
     public class VuelosController : ControllerBase
     {
         Repository<Vuelos> repository;
-       
+        public DateTime Date { get; set; } = DateTime.Now.Date;
+
 
         public VuelosController(sistem21_vuelosContext context)
         {
             repository = new(context);
-
+            Date = Date.AddHours(DateTime.Now.Hour);
+            Date = Date.AddMinutes(DateTime.Now.Minute);
+            Date = Date.AddSeconds(DateTime.Now.Second+10);
+            //Date = Date.AddHours(2);
         }
 
         [HttpGet]
@@ -182,11 +186,22 @@ namespace VuelosAPI.Controllers
                     repository.Update(vueloactual);
                 }
 
-                if ((vueloactual.Estado == (int)Estado.Cancelado || vueloactual.Estado == (int)Estado.Despegado)
+                if ( vueloactual.Estado == (int)Estado.Despegado
                      && Hora20Segundos < Hora)
                 {
                     repository.Delete(vueloactual);
                 }
+                if(vueloactual.Estado == (int)Estado.Cancelado &&Date <= Hora)
+                {
+                    repository.Delete(vueloactual);
+                    Date = DateTime.Now.Date;
+                    Date = Date.AddHours(DateTime.Now.Hour);
+                    Date = Date.AddMinutes(DateTime.Now.Minute);
+                    Date = Date.AddSeconds(DateTime.Now.Second+10);
+                  
+
+                }
+
 
 
             }

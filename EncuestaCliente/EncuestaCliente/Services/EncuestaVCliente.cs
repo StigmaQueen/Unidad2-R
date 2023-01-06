@@ -14,7 +14,7 @@ namespace EncuestaCliente.Services
 
         public EncuestaVCliente()
         {
-            cliente.BaseAddress = new Uri("https://3a0b-2806-108e-26-4326-f422-3465-5893-5706.ngrok.io/votacion/");
+            cliente.BaseAddress = new Uri("https://c8c8-187-209-228-54.ngrok.io/votacion/");
 
 
         }
