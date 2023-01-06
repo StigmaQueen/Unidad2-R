@@ -1,0 +1,146 @@
+﻿<Window x:Class="ClienteAerolioneaWPF.Views.VuelosView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:converter="clr-namespace:ClienteAerolioneaWPF.Helpers"
+        xmlns:viewmodel="clr-namespace:ClienteAerolioneaWPF.ViewModels"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClienteAerolioneaWPF.Views"
+        mc:Ignorable="d"
+        Title="VuelosView" Height="450" Width="890" MaxWidth="890">
+    <Window.DataContext>
+        <viewmodel:AerolineaViewModel></viewmodel:AerolineaViewModel>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <ResourceDictionary>
+            <converter:RemarkStatusConverter x:Key="RemarkStatusConverter"/>
+            <converter:RemarkStatusStringConverter x:Key="remarkstring"></converter:RemarkStatusStringConverter>
+        </ResourceDictionary>
+    </Window.Resources>
+    <StackPanel>
+
+        <Border Padding="15" CornerRadius="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#F1A3C5" Offset="0.1" />
+                        <GradientStop Color="#8D72D1" Offset="1.0" />
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label
+                Content="DEPARTURES" 
+                HorizontalAlignment="Left" 
+                Foreground="White" 
+                FontSize="30"
+                FontWeight="Bold"/>
+                <Label Content="{Binding Hora, StringFormat=d}"
+                Grid.Column="1"
+                HorizontalAlignment="Right" 
+                Foreground="White" 
+                FontSize="30"
+                FontWeight="Bold">
+                    
+                </Label>
+                
+            </Grid>
+        </Border>
+
+        <Grid Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--HEADER-->
+            <Frame
+                Grid.ColumnSpan="5"/>
+
+            <Label
+                Style="{StaticResource LabelHeader}"
+                Content="Time"/>
+            <Label
+                Style="{StaticResource LabelHeader}"
+                Grid.Column="1"
+                Content="Origen"/>
+            <Label
+                Style="{StaticResource LabelHeader}"
+                Grid.Column="2"
+                Content="Destination"/>
+            <Label
+                Style="{StaticResource LabelHeader}"
+                Grid.Column="3"
+                Content="Flight"/>
+            <Label
+                Style="{StaticResource LabelHeader}"
+                Grid.Column="4"
+                Content="Gate"/>
+            <Label
+                Style="{StaticResource LabelHeader}"
+                Grid.Column="5"
+                Content="Remarks"/>
+        </Grid>
+        <!--BODY-->
+        <ListBox ItemsSource="{Binding VeulosEntrantes}"
+            x:Name="lstFlights"
+            Margin="5"
+            VerticalAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <DataGridCell>
+                        <Border 
+                            Margin="0,0,0,5"
+                            Padding="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="140"/>
+                                </Grid.ColumnDefinitions>
+                                <Label  HorizontalAlignment="Left"
+                                    Style="{StaticResource LabelHeader}"
+                                    
+                                    Content="{Binding Fecha, StringFormat='{}{0:MM/dd/yyyy}'}"/>
+
+                                <Label HorizontalAlignment="Center"
+                                    Style="{StaticResource LabelHeader}"
+                                    Content="{Binding Origen}"
+                                    Grid.Column="1"/>
+                                <Label HorizontalAlignment="Center"
+                                    Style="{StaticResource LabelHeader}"
+                                    Content="{Binding Destino}"
+                                    Grid.Column="2"/>
+                                <Label HorizontalAlignment="Center"
+                                    Style="{StaticResource LabelHeader}"
+                                    Content="{Binding Clave}"
+                                    Grid.Column="3"/>
+                                <Label HorizontalAlignment="Center"
+                                    Style="{StaticResource LabelHeader}"
+                                    Content="{Binding Puerta}"
+                                    Grid.Column="4"/>
+
+                                <Label HorizontalAlignment="Center"
+                                    Style="{StaticResource LabelHeader}"
+                                    Content="{Binding Estado, Converter={StaticResource remarkstring}}"
+                                    Foreground="{Binding Estado, Converter={StaticResource RemarkStatusConverter}}"
+                                    Grid.Column="5"/>
+                            </Grid>
+                        </Border>
+                    </DataGridCell>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+</Window>

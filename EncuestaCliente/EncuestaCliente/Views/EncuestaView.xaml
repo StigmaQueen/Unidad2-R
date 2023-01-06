@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:EncuestaCliente.ViewModels"
+             x:Class="EncuestaCliente.Views.EncuestaView" Background="#009879">
+
+    <ContentPage.BindingContext>
+        <vm:EncuestaClienteViewModel></vm:EncuestaClienteViewModel>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="#1EBC73"/>
+                        <Setter Property="CornerRadius" Value="15"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="TextColor" Value="#FFF"/>
+                        <Setter Property="FontSize" Value="Subtitle"/>
+                        <Setter Property="Margin" Value="0,0,0,15"/>
+                    </Style>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            
+            <Label
+            Margin="15,15,0,0"
+            FontSize="Title"
+            FontAttributes="Bold"
+            TextColor="#FFF"
+            Text="Encuesta 2022"/>
+            <ScrollView>
+                <StackLayout>
+                    <Frame
+            Margin="15">
+                        <Grid
+                 RowDefinitions=".3*, 1*, 5, 3*"
+                Padding="15">
+                            <Grid.Resources>
+                                <ResourceDictionary>
+                                    <Style TargetType="Label">
+                                        <Setter Property="TextColor" Value="#373737"/>
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                        <Setter Property="VerticalOptions" Value="Center"/>
+                                    </Style>
+                                </ResourceDictionary>
+                            </Grid.Resources>
+
+                            <Label
+                    Text="Pregunta: 1/3"/>
+
+                            <Label
+                    Grid.Row="1"
+                    FontSize="Title"
+                    Text="{Binding Pregunta.Descripcion}"/>
+                            <Frame
+                    HasShadow="False"
+                    Grid.Row="2"
+                    BackgroundColor="#E6E6E6"/>
+                            <StackLayout
+                    Grid.Row="3">
+                                <Button IsEnabled="{Binding Votado1}"
+                        Margin="0,15,0,15" Command="{Binding ElegirOpcionCommand}" CommandParameter="Excelente,1"
+                        Text="A) Excelente"/>
+                                <Button IsEnabled="{Binding Votado1}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Bueno,1"
+                                    Text="B) Bueno"/>
+                                <Button IsEnabled="{Binding Votado1}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Regular,1"
+                                        Text="C) Regular"/>
+                                <Button 
+                        Margin="0" IsEnabled="{Binding Votado1}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Malo,1"
+                        Text="D) Malo"/>
+                            </StackLayout>
+                        </Grid>
+
+
+                    </Frame>
+                    <Frame
+            Margin="15">
+                        <Grid
+                RowDefinitions=".3*, 1*, 5, 4*"
+                Padding="15">
+                            <Grid.Resources>
+                                <ResourceDictionary>
+                                    <Style TargetType="Label">
+                                        <Setter Property="TextColor" Value="#373737"/>
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                    </Style>
+                                </ResourceDictionary>
+                            </Grid.Resources>
+
+                            <Label
+                    Text="Pregunta: 2/3"/>
+
+                            <Label
+                    Grid.Row="1"
+                    FontSize="Title"
+                    Text="{Binding Pregunta.Descripcion1}"/>
+                            <Frame
+                    HasShadow="False"
+                    Grid.Row="2"
+                    BackgroundColor="#E6E6E6"/>
+                            <StackLayout
+                    Grid.Row="3">
+                                <Button IsEnabled="{Binding Votado2}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Excelente,2"
+                        Margin="0,15,0,15"
+                        Text="A) Excelente"/>
+                                <Button 
+                                    IsEnabled="{Binding Votado2}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Bueno,2"
+                                    Text="B) Bueno"/>
+                                <Button IsEnabled="{Binding Votado2}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Regular,2"
+                                    Text="C) Regular"/>
+                                <Button IsEnabled="{Binding Votado2}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Malo,2"
+                        Margin="0"
+                        Text="D) Malo"/>
+                            </StackLayout>
+                        </Grid>
+
+
+                    </Frame>
+                    <Frame
+            Margin="15">
+                        <Grid
+                RowDefinitions=".3*, 1*, 5, 4*"
+                Padding="15">
+                            <Grid.Resources>
+                                <ResourceDictionary>
+                                    <Style TargetType="Label">
+                                        <Setter Property="TextColor" Value="#373737"/>
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                    </Style>
+                                </ResourceDictionary>
+                            </Grid.Resources>
+
+                            <Label
+                    Text="Pregunta: 3/3"/>
+
+                            <Label
+                    Grid.Row="1" VerticalOptions="Center"
+                    FontSize="Title" 
+                    Text="{Binding Pregunta.Descripcion2}"/>
+                            <Frame
+                    HasShadow="False"
+                    Grid.Row="2"
+                    BackgroundColor="#E6E6E6"/>
+                            <StackLayout
+                    Grid.Row="3">
+                                <Button IsEnabled="{Binding Votado3}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Excelente,3"
+                        Margin="0,15,0,15"
+                        Text="A) Excelente"/>
+                                <Button 
+                                    IsEnabled="{Binding Votado3}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Bueno,3"
+                                    Text="B) Bueno"/>
+                                <Button IsEnabled="{Binding Votado3}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Regular,3"
+                                    Text="C) Regular"/>
+                                <Button IsEnabled="{Binding Votado3}" Command="{Binding ElegirOpcionCommand}" CommandParameter="Malo,3"
+                        Margin="0"
+                        Text="D) Malo"/>
+                            </StackLayout>
+                        </Grid>
+
+
+                        
+                    </Frame>
+
+                    <Frame Margin="15">
+                        <Button BackgroundColor="#009879" Command="{Binding VotarCommand}" CommandParameter="{Binding Voto}"
+                    Margin="0"
+                    x:Name="Prev"                   
+                    Text="Enviar"/>
+                    </Frame>
+
+                </StackLayout>
+            </ScrollView>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

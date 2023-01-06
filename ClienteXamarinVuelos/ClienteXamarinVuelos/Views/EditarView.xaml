@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClienteXamarinVuelos.Views.EditarView" NavigationPage.HasNavigationBar="false">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#8D72D1" Offset="0.1" />
+                        <GradientStop Color="#F1A3C5" Offset="0.6" />
+                        <GradientStop Color="#FFF" Offset="0.9"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </StackLayout.Background>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="Medium"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="TextColor" Value="#373737"/>
+                        <Setter Property="Margin" Value="5,0,0,0"/>
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="TextColor" Value="#FFF"/>
+                        <Setter Property="FontSize" Value="Medium"/>
+                    </Style>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <StackLayout
+            VerticalOptions="Center">
+
+                <Frame
+                CornerRadius="15"
+                Background="#FFF"
+                Margin="15,15,15,0"
+                Padding="0">
+                    <StackLayout>
+                        <Frame
+                        BackgroundColor="#FC9A7D"/>
+                        <Grid
+                        Margin="15"
+                        ColumnDefinitions="*,*"
+                        RowDefinitions="*,*,*,*,*,*">
+                            <Frame
+                            WidthRequest="30"
+                            CornerRadius="30"
+                            Grid.Column="1"
+                            BackgroundColor="#A4A0E8">
+                                <Image
+                                Source="plane.png"
+                                HeightRequest="10"/>
+                            </Frame>
+                            <StackLayout>
+                                <Label
+                                Text="Código de Vuelo"/>
+                                <Entry Text="{Binding Clon.Clave}"
+                                Placeholder="00000"
+                                Keyboard="Text"/>
+                            </StackLayout>
+                            <StackLayout
+                            Grid.Row="1"
+                            Grid.ColumnSpan="2">
+                                <Label 
+                                Text="Origen"/>
+                                <Entry Text="{Binding Clon.Origen}" />
+                            </StackLayout>
+                            <StackLayout
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2">
+                                <Label 
+                                Text="Destino"/>
+                                <Entry Text="{Binding Clon.Destino}"/>
+                            </StackLayout>
+                            <StackLayout
+                            Grid.Row="3">
+                                <Label
+                                Text="Fecha de Vuelo"/>
+                                <DatePicker  Date="{Binding Clon.Fecha}"/>
+                            </StackLayout>
+                            <StackLayout
+                            Grid.Row="3"
+                            Grid.Column="1">
+                                <Label
+                                Text="Hora de Vuelo"/>
+                                <TimePicker Time="{Binding HoraVuelo}"/>
+                            </StackLayout>
+                            <StackLayout
+                            Grid.Row="4"
+                            Grid.ColumnSpan="1">
+                                <Label
+                                Text="Puerta de Salida"/>
+                                <Entry 
+                                Placeholder="00000"
+                               Text="{Binding Clon.Puerta}" Keyboard="Numeric"/>
+                            </StackLayout>
+
+                            <StackLayout
+                            Grid.Row="4"
+                            Grid.Column="1">
+                                <Label
+                                Text="Estado"/>
+                                <Picker SelectedItem="{Binding Estado}">
+                                    <Picker.Items>
+                                        <x:String>A Tiempo</x:String>
+                                        <x:String>Cancelado</x:String>
+                                        <x:String>Retrasado</x:String>
+                                        <x:String>Abordado</x:String>
+                                        <x:String>Depegado</x:String>
+                                    </Picker.Items>
+                                </Picker>
+                            </StackLayout>
+
+                            <Button
+                            BackgroundColor="#6760D4"
+                            FontAttributes="Bold"
+                            FontSize="Title" Command="{Binding EditarCommand}"
+                            CornerRadius="30"
+                            Grid.Row="5"
+                            Grid.ColumnSpan="2"
+                            Text="EDITAR VUELO"/>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+                <Frame
+            BackgroundColor="Transparent"
+            Padding="0"
+            VerticalOptions="Start"
+            Margin="15,-10,15,0">
+
+                    <Path
+                HorizontalOptions="CenterAndExpand"
+                Fill="#FFF"
+                Stroke="#FFF"
+                Data="M25 30 L0 0 L50 0 Z M75 30 L50 0 L100 0 Z
+                      M125 30 L100 0 L150 0 Z M175 30 L150 0 L200 0 Z
+                      M225 30 L200 0 L250 0 Z M275 30 L250 0 L300 0 Z
+                      M325 30 L300 0 L350 0 Z"/>
+                </Frame>
+            </StackLayout>
+            <Frame
+            BackgroundColor="Transparent"
+            Padding="0"
+            VerticalOptions="Start"
+            Margin="15,15,15,-10">
+
+                <Path
+                HorizontalOptions="CenterAndExpand"
+                Fill="#FFF"
+                Stroke="#FFF"
+                Data="M0 0 L0 30 L25 30 Z M50 0 L25 30 L75 30 Z
+                      M100 0 L75 30 L125 30 Z M150 0 L125 30 L175 30 Z
+                      M200 0 L175 30 L225 30 Z M250 0 L225 30 L275 30 Z
+                      M300 0 L275 30 L325 30 Z M350 0 L325 30 L350 30 Z"/>
+            </Frame>
+
+            <Frame
+            CornerRadius="15"
+            Margin="15,0,15,0"
+            Padding="0">
+                <Grid 
+                Margin="15"
+                ColumnDefinitions=".02* , .5*, .02*, .02*, 0.5*, .05*,.02*, .02*"
+                RowDefinitions="1*,.5*">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <Style TargetType="Label">
+                                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                <Setter Property="CharacterSpacing" Value="20"/>
+                                <Setter Property="FontAttributes" Value="Bold"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <BoxView
+                    BackgroundColor="#373737"/>
+                    <BoxView
+                    Grid.Column="1"
+                    BackgroundColor="#373737"/>
+                    <BoxView
+                    Grid.Column="2"
+                    BackgroundColor="#373737"/>
+                    <BoxView
+                    Grid.Column="3"
+                    BackgroundColor="#373737"/>
+                    <BoxView
+                    Grid.Column="4"
+                    BackgroundColor="#373737"/>
+                    <BoxView
+                    Grid.Column="5"
+                    BackgroundColor="#373737"/>
+                    <BoxView
+                    Grid.Column="6"
+                    BackgroundColor="#373737"/>
+                    <BoxView
+                    Grid.Column="7"
+                    BackgroundColor="#373737"/>
+                    <Label
+                    Grid.Row="1"
+                    Grid.ColumnSpan="8"
+                    Text="1 3 5 7 8 1 6 5 1"/>
+                </Grid>
+            </Frame>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

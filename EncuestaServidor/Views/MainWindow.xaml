@@ -1,0 +1,39 @@
+﻿<Window x:Class="EncuestaServidor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EncuestaServidor"
+        xmlns:vm="clr-namespace:EncuestaServidor.ViewModels" xmlns:views="clr-namespace:EncuestaServidor.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="650" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="#FFEDEDED">
+
+    <Window.Resources>
+        <views:ResultadosView x:Key="resultados"></views:ResultadosView>
+        <views:CrearPreguntasView x:Key="pregunta"></views:CrearPreguntasView>
+    </Window.Resources>
+    
+    <Window.DataContext>
+        <vm:EncuestaViewModel></vm:EncuestaViewModel>
+    </Window.DataContext>
+    <Grid>
+        <ContentControl>
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+
+
+                        <DataTrigger Binding="{Binding Vista}" Value="{x:Static vm:Vistas.Pregunta}">
+                            <Setter Property="Content" Value="{StaticResource pregunta}"></Setter>
+                        </DataTrigger>
+
+                        <DataTrigger Binding="{Binding Vista}" Value="{x:Static vm:Vistas.Grafica}">
+                            <Setter Property="Content" Value="{StaticResource resultados}"></Setter>
+                        </DataTrigger>
+
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
+        </ContentControl>
+    </Grid>
+</Window>

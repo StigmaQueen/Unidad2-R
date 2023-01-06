@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:ClienteXamarinVuelos.ViewModels"
+             xmlns:converter="clr-namespace:ClienteXamarinVuelos.Converters"
+             x:Class="ClienteXamarinVuelos.Views.PrincipalView"  NavigationPage.HasNavigationBar="false">
+
+    <ContentPage.BindingContext>
+        <vm:PrincipalViewModel></vm:PrincipalViewModel>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:RemarkStatusConverter x:Key="RemarkStatusConverter"/>
+            <converter:RemarkStatusStringConverter x:Key="RemarkStatusStringConverter"></converter:RemarkStatusStringConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}" RefreshColor="Red">
+        <StackLayout>
+            <StackLayout.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Color="#8D72D1" Offset="0.1" />
+                        <GradientStop Color="#F1A3C5" Offset="0.6" />
+                        <GradientStop Color="#FFF" Offset="0.9"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </StackLayout.Background>
+
+            <StackLayout 
+            Orientation="Horizontal"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+                <Image
+                Source="plane.png"
+                HeightRequest="30"/>
+                <Label
+                Style="{StaticResource LabelHeader}"
+                TextColor="#FFF"
+                FontSize="40"
+                Text="FLIGHTS"/>
+
+            </StackLayout>
+
+            <Frame
+            BackgroundColor="Transparent"
+            Padding="0"
+            VerticalOptions="Start"
+            Margin="15,0,15,-10">
+
+                <Path
+                HorizontalOptions="CenterAndExpand"
+                Fill="#FFF"
+                Stroke="#FFF"
+                Data="M25 0 L0 30 L50 30 Z M75 0 L50 30 L100 30 Z
+                      M125 0 L100 30 L150 30 Z M175 0 L150 30 L200 30 Z
+                      M225 0 L200 30 L250 30 Z M275 0 L250 30 L300 30 Z
+                      M325 0 L300 30 L350 30 Z"/>
+            </Frame>
+
+            <CollectionView ItemsSource="{Binding VuelosEntrantes}"
+            x:Name="lstFlights"
+            Margin="15,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid 
+                        BackgroundColor="#FFF"
+                        Padding="10"
+                        Margin="0,0,0,20"
+                        ColumnDefinitions="30, *, .4*"
+                        RowDefinitions="30, *, 30">
+                            <Grid.Resources>
+                                <ResourceDictionary>
+                                    <Style TargetType="Label" x:Key="LabelDestination">
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                        <Setter Property="FontSize" Value="Title"/>
+                                        <Setter Property="TextColor" Value="#373737"/>
+                                    </Style>
+                                </ResourceDictionary>
+                            </Grid.Resources>
+
+                            <Label
+                            Grid.ColumnSpan="2"
+                            FontAttributes="Bold"
+                            FontSize="Small"
+                            TextColor="#373737"
+                            Text="{Binding Fecha, StringFormat='Departure Date: {0:dd MMM yy HH:mm}'}"/>
+                            <Label
+                            Grid.Column="2"
+                            FontAttributes="Bold"
+                            FontSize="Small"
+                            TextColor="#373737"
+                            Text="{Binding Puerta, StringFormat='Gate: {0}'}"/>
+                            <Frame Grid.Row="2"                  
+                            CornerRadius="40"
+                            BackgroundColor="{Binding Estado, Converter={StaticResource RemarkStatusConverter}}">
+
+                            </Frame>
+                            <Label
+                            Grid.Column="1"
+                            Grid.Row="2"
+                            Text="{Binding Estado, Converter={StaticResource RemarkStatusStringConverter}, StringFormat='Status: {0}'}"
+                            FontSize="Large"
+                            FontAttributes="Bold"
+                            Padding="5,0,0,0"
+                            VerticalTextAlignment="Center"
+                            TextColor="{Binding Estado, Converter={StaticResource RemarkStatusConverter}}"/>
+
+                            <StackLayout 
+                            Grid.Row="1"
+                            VerticalOptions="CenterAndExpand">
+                                <Frame
+                                Padding="5"
+                                CornerRadius="60"
+                                Background="#6760D4"/>
+
+                                <Frame
+                                HorizontalOptions="Center"
+                                Padding="2"
+                                HeightRequest="20"
+                                Background="#E6E6E6"/>
+
+                                <Frame
+                                CornerRadius="60"
+                                Background="#FC9A7D"
+                                Padding="8">
+                                    <Image
+                                    Source="plane.png"/>
+                                </Frame>
+
+                                <Frame
+                                HorizontalOptions="Center"
+                                Padding="2"
+                                HeightRequest="20"
+                                Background="#E6E6E6"/>
+
+                                <Frame
+                                Padding="5"
+                                CornerRadius="60"
+                                Background="#6760D4"/>
+                            </StackLayout>
+
+                            <StackLayout
+                            Margin="15,0,0,0"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            VerticalOptions="Center">
+
+                                <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Departure From"
+                                HorizontalOptions="Start"/>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Image 
+                                    Source="plane_takeoff.png"
+                                    HeightRequest="15"/>
+                                    <Label
+                                    Style="{StaticResource LabelDestination}"
+                                    Text="{Binding Origen}"/>
+                                </StackLayout>
+
+                                <Label
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="Arrival At"
+                                HorizontalOptions="Start"/>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Image 
+                                    Source="plane_landing.png"
+                                    HeightRequest="15"/>
+                                    <Label
+                                    Style="{StaticResource LabelDestination}"
+                                    Text="{Binding Destino}"/>
+                                </StackLayout>
+                            </StackLayout>
+
+                            <StackLayout
+                            Grid.Column="2"
+                            Grid.Row="1"
+                            VerticalOptions="Center">
+
+                                <ImageButton
+                                BackgroundColor="#FC9A7D"
+                                CornerRadius="30"
+                                HeightRequest="40"
+                                Padding="5" Clicked="ImageButton_Clicked"
+                                Source="edit.png"/>
+
+                                <ImageButton
+                                BackgroundColor="#6760D4"
+                                CornerRadius="30"
+                                HeightRequest="40" Clicked="ImageButton_Clicked_1"
+                                Padding="5"
+                                Source="delete.png"/>
+                            </StackLayout>
+
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button
+            BackgroundColor="#6460D4"
+            Text="Add Flight" Command="{Binding VerAddFlyCommand}"
+            FontAttributes="Bold"
+            FontSize="Title"
+            TextColor="#FFF"/>
+        </StackLayout>
+    </RefreshView>
+</ContentPage>

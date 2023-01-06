@@ -1,0 +1,286 @@
+﻿<UserControl xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  x:Class="EncuestaServidor.Views.ResultadosView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EncuestaServidor.Views"   xmlns:chart="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:viewmodels="clr-namespace:EncuestaServidor.ViewModels"
+             mc:Ignorable="d"  Height="400" Width="650">
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".3*"/>
+            <RowDefinition Height=".025*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="#FF3C3939"/>
+                <Setter Property="FontWeight" Value="DemiBold"/>
+                <Setter Property="FontSize" Value="15"/>
+            </Style>
+        </Grid.Resources>
+        <Border
+            Grid.ColumnSpan="3"
+            Background="#165A4C"/>
+        <Label Content="Resultado de encuesta"
+               Foreground="#FFF"
+               FontWeight="Bold"
+               VerticalAlignment="Center"/>
+        <Border
+            CornerRadius="10"
+            Width="80"
+            Grid.Column="2"
+            HorizontalAlignment="Right"
+            Background="#1EBC73"
+            Margin="5">
+
+            <Button
+                Click="Button_Click"
+                Background="Transparent"
+                BorderThickness="0"
+                ToolTip="Cerrar"
+                Foreground="#FFF" Height="22" VerticalAlignment="Top">X</Button>
+        </Border>
+        <Border
+            Grid.Row="2"
+            Grid.ColumnSpan="3"
+            Background="#FFD6D6D6"/>
+        <Border
+            Grid.Row="1"
+            Padding="0"
+            Background="#FFF"
+            CornerRadius="10"
+            Margin="10">
+
+            <TextBlock                
+                Grid.Row="1"
+                TextWrapping="Wrap" Text="{Binding Pregunta1.Descripcion}"></TextBlock>
+        </Border>
+
+        <Border
+            Background="#FFF"
+            CornerRadius="10"
+            Margin="10"
+            Grid.Row="3">
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="2.5"/>
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Foreground" Value="#FF3C3939"/>
+                        <Setter Property="FontWeight" Value="DemiBold"/>
+                    </Style>
+                    <Style TargetType="ProgressBar">
+                        <Setter Property="Height" Value="10"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Excelente}"></Run> (<Run Text="{Binding Voto1}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto1}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Bueno}"></Run> (<Run Text="{Binding Voto2}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto2}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Regular}"></Run> (<Run Text="{Binding Voto3}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto3}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Malo}"></Run> (<Run Text="{Binding Voto4}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto4}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="1"
+            Padding="0"
+            Background="#FFF"
+            CornerRadius="10"
+            Margin="10">
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                Grid.Row="1"
+                TextWrapping="Wrap" Text="{Binding Pregunta1.Descripcion1}"></TextBlock>
+        </Border>
+
+        <Border
+            Background="#FFF"
+            CornerRadius="10"
+            Margin="10"
+            Grid.Row="3"
+            Grid.Column="1">
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="2.5"/>
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Foreground" Value="#FF3C3939"/>
+                        <Setter Property="FontWeight" Value="DemiBold"/>
+                    </Style>
+                    <Style TargetType="ProgressBar">
+                        <Setter Property="Height" Value="10"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Excelente}"></Run> (<Run Text="{Binding Voto5}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto5}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Bueno}"></Run> (<Run Text="{Binding Voto6}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto6}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Regular}"></Run> (<Run Text="{Binding Voto7}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto7}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Malo}"></Run> (<Run Text="{Binding Voto8}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto8}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+        </Border>
+
+        <Border
+            Grid.Row="1"
+            Grid.Column="2"
+            Padding="0"
+            Background="#FFF"
+            CornerRadius="10"
+            Margin="10">
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                Grid.Row="1"
+                TextWrapping="Wrap" Text="{Binding Pregunta1.Descripcion2}"></TextBlock>
+        </Border>
+
+        <Border
+            Background="#FFF"
+            CornerRadius="10"
+            Margin="10"
+            Grid.Row="3"
+            Grid.Column="2">
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Margin" Value="2.5"/>
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Foreground" Value="#FF3C3939"/>
+                        <Setter Property="FontWeight" Value="DemiBold"/>
+                    </Style>
+                    <Style TargetType="ProgressBar">
+                        <Setter Property="Height" Value="10"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Style>
+                </StackPanel.Resources>
+
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Excelente}"></Run> (<Run Text="{Binding Voto9}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto9}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Bueno}"></Run> (<Run Text="{Binding Voto10}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto10}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Regular}"></Run> (<Run Text="{Binding Voto11}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto11}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+                <Border>
+                    <StackPanel>
+                        <TextBlock>
+                    <Run Text="{Binding Pregunta1.Malo}"></Run> (<Run Text="{Binding Voto12}"></Run> Respuestas)
+                        </TextBlock>
+                        <ProgressBar  Maximum="{Binding Total}" Value="{Binding Voto12}" ></ProgressBar>
+                    </StackPanel>
+
+                </Border>
+
+            </StackPanel>
+        </Border>
+    </Grid>
+
+
+</UserControl>
